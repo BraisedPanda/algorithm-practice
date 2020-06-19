@@ -1,9 +1,10 @@
 package com.example.niuketest.sword_finger_offer.practice;
 
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import javax.swing.plaf.nimbus.AbstractRegionPainter;
+import java.util.*;
 
 /**
  * @program: niuke-test
@@ -178,9 +179,20 @@ public class test15 {
     */
 
     public boolean isContinuous(int [] numbers) {
+        if(numbers.length == 0){
+            return false;
+        }
         quickSort(numbers,0,numbers.length-1);
-
-        return false;
+        int count = 0;
+        int zeroCount=0;
+        for(int i=1;i<5;i++){
+            if(numbers[i-1]==0){
+                zeroCount++;
+            }else if(numbers[i]-numbers[i-1]!=1){
+                count += numbers[i]-numbers[i-1]-1;
+            }
+        }
+        return count<=zeroCount && count>=0;
     }
 
     private void quickSort(int[] numbers, int left, int right) {
@@ -210,9 +222,191 @@ public class test15 {
 
     @Test
     public void testQuickSort(){
-        int[] numbers = {4,7,1,0,2,9,7};
-        quickSort(numbers,0,numbers.length-1);
-        System.out.println(666);
+        int[] numbers = {1,0,0,1,0};
+        System.out.println(isContinuous(numbers));
+
     }
+
+    
+    /**
+    * @Description: 每年六一儿童节, 牛客都会准备一些小礼物去看望孤儿院的小朋友, 今年亦是如此。
+     * HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。
+     * 然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,
+     * 然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0...m-1报数....
+     * 这样下去....直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。
+     * 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
+     * 如果没有小朋友，请返回-1
+    * @Date: 2020/6/16 0016
+    */
+
+    public  int LastRemaining_Solution(int n,int m){
+       if(n<1 || m<1) return -1;
+       int count=n, step=0, i=-1;
+       int[] array = new int[n];
+       while(count>0){
+           i++;
+           if(i >= n) i=0;  // 作循环环
+           if(array[i] ==-1)  continue;
+           step++;
+           if(step == m){
+                count--;
+                step=0;
+                array[i] = -1;
+           }
+       }
+       return i;
+    }
+
+    /** 
+    * @Description: 此方法作废，每次报数只能从零开始，并不能继续
+    * @Param: [n, m]
+    * @Author: chenzhen      
+    * @Date: 2020/6/16 0016 
+    */ 
+    public int LastRemaining_Solution2(int n, int m) {
+        if(n==0){
+            return -1;
+        }
+        int[][] array = new int[n][2];
+        for(int i=0; i<n; i++){
+            array[i][0] = 0;
+        }
+        // int[i][0] 未出局，int[i][1] 已出局
+        int count=0;
+        while(true){
+            if(n<m){
+                int a = m % n-1;
+                count = remark(array,n,count,a);
+                if(count == -1){
+                    break;
+                }
+            }else{
+                count = remark(array,n,count,m-1);
+                if(count == -1){
+                    break;
+                }
+            }
+
+        }
+        for (int i = 0; i <n ; i++) {
+            if(array[i][0] == 0){
+                return i+1;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * 标记
+     *
+     * @param array 数组
+     * @param n     总共的人数
+     * @param count 已出局人数
+     * @param index 索引
+     * @return int
+     */
+    public int remark(int[][] array,int n,int count,int index){
+        if(count == n-1){
+            return -1;
+        }else{
+            if(array[index][0]!=1){
+                array[index][0] = 1;
+            }else{ //顺延下一位，标志位置1
+                int a = index;
+                while(array[a][0] == 1){
+                    if(a>=n-1){
+                        a = (n-1) % a;
+                    }else{
+                        a++;
+                    }
+                }
+                array[a][0] = 1;
+            }
+
+            return count+1;
+        }
+
+    }
+
+
+
+    @Test
+    public void testLastRemainingSolution(){
+        System.out.println(LastRemaining_Solution(3,2));
+    }
+    
+    /** 
+     @Description: 求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+     @Date: 2020/6/19 0019
+    */
+
+    public int Sum_Solution(int n) {
+        int sum = n ;
+        boolean flag =  (n>0) && ((sum+=Sum_Solution(n-1))>0);
+        return sum;
+    }
+
+    @Test
+    public void testSum_Solution(){
+        System.out.println(6 & 12 <<1);
+    }
+
+    /**
+    * @Description: 写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+    * @Date: 2020/6/19 0019
+    */
+    public int Add(int num1,int num2) {
+        while(num2!=0){
+            int sum = num1 ^ num2;
+            int carry = (num1 & num2)<<1;
+            num2 = carry;
+            num1 = sum;
+        }
+        return num1;
+    }
+
+    /**
+    * @Description: 将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0
+    * @Date: 2020/6/19 0019
+    */
+    public int StrToInt(String str) {
+        if(str == null || str.trim().isEmpty()) return 0;
+        char[] array = str.toCharArray();
+        Character[] numbers = {'-','+','0','1','2','3','4','5','6','7','8','9'};
+        List<Character> characterList = Arrays.asList(numbers);
+        int sum = 0;
+        if(!characterList.contains(numbers[0])){
+            return 0;
+        }
+        // i为1代表符号位开头，i为0代表是非符号位开头
+        int i=0;
+        int digit = 1;
+        // 作为符号位判断
+        int sign =1;
+        if(array[0] == '-'){
+            sign = -1;
+            i=1;
+        }
+        if(array[0] == '+'){
+            sign = 1;
+            i = 1;
+        }
+        for(;i<array.length;i++){
+            if(!characterList.contains(array[i])) return 0; //中间碰到任意非numbers内容，直接返回0
+            int beishu = (int)Math.pow(10,(array.length-digit-i));
+            int shengshu = array[i]-'0';
+            sum = beishu*shengshu  + sum;
+        }
+        return sum*sign;
+    }
+    @Test
+    public void  testStrToInt(){
+        char abc = '7';
+
+        System.out.println((abc-'0')*5);
+    }
+
+
 
 }
