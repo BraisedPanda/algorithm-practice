@@ -5,6 +5,7 @@ import org.springframework.util.StringUtils;
 
 import javax.swing.plaf.nimbus.AbstractRegionPainter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @program: niuke-test
@@ -407,6 +408,192 @@ public class test15 {
         System.out.println((abc-'0')*5);
     }
 
+    /**
+    * @Description:给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],
+     * 其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。
+     * 不能使用除法。（注意：规定B[0] = A[1] * A[2] * ... * A[n-1]，B[n-1] = A[0] * A[1] * ... * A[n-2];）
+    * @Date: 2020/6/22 0022
+    */
 
+    public int[] multiply(int[] A) {
+        int length = A.length;
+        int[] B = new int[length];
+        for(int i=0; i<length; i++){
+            int temp = 1;
+            for(int j=0;j<length;j++){
+                if(j == i) continue;
+                temp =temp*A[j];
+            }
+            B[i] = temp;
+        }
+        return B;
+    }
+
+    @Test
+    public void testSplit(){
+        int[] array = {1,2,3,4,5,6,7};
+        int[] arrayB = multiply(array);
+        for (int temp:
+                arrayB) {
+            System.out.println(temp);
+        }
+
+    }
+    
+    
+    /** （没通过完全测试）
+    * @Description: 请实现一个函数用来匹配包括'.'和'*'的正则表达式。
+     * 模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（包含0次）。
+     * 在本题中，匹配是指字符串的所有字符匹配整个模式。
+     * 例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
+    * @Date: 2020/6/23 0023 
+    */
+    public boolean match2(char[] str, char[] pattern){
+        if(str.length > pattern.length) return false;
+        if(str.length == 0){
+            if(pattern.length ==0) return true;
+            if(pattern.length == 1){
+                if(pattern[0]!='*'){
+                    return false;
+                }
+            }
+            if(pattern.length>1){
+                for (int i = 0; i < pattern.length-1; i++) {
+                    if(pattern[i]=='*'){ // 首位是*,通过
+                        continue;
+                    }else if(pattern[i]!='*' && pattern[i+1] == '*'){// 第一位不是*，第二位是*,通过
+                        continue;
+                    }else return false;
+                }
+                return true;
+            }
+
+        }
+
+        int index = 0;
+
+        for (int i = 0; i < str.length; i++) {
+            char tempChar = str[i];
+            int j = index == 0 ? 0:index;
+            if(index>=pattern.length) return false;
+            for (;j < pattern.length-1;) {
+                if(tempChar == pattern[j] && pattern[j-1] != '*'){ //完全匹配，放行
+                    j++;
+                    index = j;
+                    break;
+                }else if('.'== pattern[j]){ //“.”符号，放行
+                    j++;
+                    index = j;
+                    break;
+                }else if('*'== pattern[j]){ //“.”符号，放行
+                    if(pattern[j-1] == tempChar){ //上一次字符匹配
+                        j++;
+                        continue;
+                    }else if(pattern[j-1] == '.'){
+                        j++;
+                        index = j;
+                        continue;
+                    }
+                    return  false;
+                } else if(tempChar != pattern[j]){
+                    // 首字符不匹配，第二次是“*”，放行
+                    if(j+1!=pattern.length){
+                        if(pattern[j+1] == '*'){
+                            j+=2;
+                            index = j;
+                            continue;
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return false;
+                    }
+
+                }else {
+                    return false;
+                }
+
+            }
+        }
+        // 结束循环，如果pattern也结束了
+        if(index == pattern.length) {return true;}
+        // 如果pattern还没结束
+        for (int i = index; i < pattern.length-1; i++) {
+            if(pattern[i] == '*'){
+                continue;
+            }else{
+                if(pattern[i+1]!= '*') return false;
+            }
+        }
+        // 判断最后一位
+        if(pattern[pattern.length-1] == '*'){
+            return true;
+        }else
+            return false;
+
+    }
+    public boolean match(char[] str, char[] pattern){
+        if(str == null || pattern == null){
+            return false;
+        }
+        int strIndex = 0;
+        int patternIndex = 0;
+        return compareTwoStr(str,strIndex,pattern,patternIndex);
+    }
+
+    private boolean compareTwoStr(char[] str, int strIndex, char[] pattern, int patternIndex) {
+        // 如果strIndex,patternIndex 分别等于str,pattern长度，匹配成功
+        if(str.length == strIndex && pattern.length == patternIndex){
+            return true;
+        }
+        // 如果patternIndex匹配完成，str还有剩余，匹配失败
+        if(patternIndex == pattern.length && str.length != strIndex){
+            return false;
+        }
+        // 如果pattern 是 ？*模式
+        if(patternIndex+1 < pattern.length && pattern[patternIndex+1] =='*'){
+            if(strIndex!=str.length && str[strIndex] == pattern[patternIndex] || strIndex!=str.length && pattern[patternIndex] == '.'){
+                // 匹配到了，a* 或者 .*的情况
+                return compareTwoStr(str, strIndex, pattern, patternIndex + 2)//模式后移2，视为x*匹配0个字符
+                        || compareTwoStr(str, strIndex + 1, pattern, patternIndex + 2)//视为模式匹配1个字符
+                        || compareTwoStr(str, strIndex + 1, pattern, patternIndex);//*匹配1个，再匹配str中的下一个
+            }else{
+                return compareTwoStr(str,strIndex,pattern,patternIndex+2); // 算作2
+            }
+        }
+        // pattern 不是 ？* 模式
+        if(strIndex!=str.length && pattern[patternIndex] == '.' || strIndex!=str.length && pattern[patternIndex] == str[strIndex]){
+            return compareTwoStr(str,strIndex+1,pattern,patternIndex+1);
+        }
+
+        return false;
+    }
+
+    @Test
+    public void testMatch(){
+        char[] str = {'a','a','a'};
+//        char[] pattern = {'a','b','*','c','*','a','*','a'};
+        char[] pattern = {'a','*','a'};
+        System.out.println(match(str,pattern));
+
+    }
+
+    @Test
+    public void testStringJoin(){
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        String ids = getIds(list);
+        System.out.println(false || false || true);
+    }
+
+    public String getIds(List<Integer> list){
+        List<String> idsList = new ArrayList<>();
+        for (Integer id:
+                list) {
+            idsList.add(id.toString());
+        }
+        return String.join(",",idsList);
+    }
 
 }
