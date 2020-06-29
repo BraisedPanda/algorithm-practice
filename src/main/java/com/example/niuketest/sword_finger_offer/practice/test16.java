@@ -184,5 +184,130 @@ public class test16 {
         public void testFirstAppearingOnce(){
             System.out.println(FirstAppearingOnce());
         }
+
+    public class ListNode {
+        int val;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+    /** 
+    * @Description: 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+    * @Date: 2020/6/29 0029 
+    */
+    /*
+    * @Description: 解题思路：设置快慢指针，满指针每次走1步，快指针每次走2步
+    * 快慢指针能够遇到，说明有环
+    * 快慢指针在相遇点，两个指针都改为慢指针。其中一个指针在链表起点位置，一个在相遇点位置，
+    * 同时出发，再次相遇的地方为环入口点
+    */
+    public ListNode EntryNodeOfLoop(ListNode pHead){
+        if(pHead == null || pHead.next==null){
+            return null;
+        }
+        ListNode slow = pHead;
+        ListNode fast = pHead;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){ //快慢指针相遇
+                fast = pHead; // 其中一个指针指向链表头
+                while(fast!=slow){
+                    fast = fast.next;
+                    slow = slow.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
     
+    /** 
+    * @Description: 在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，
+     * 重复的结点不保留，返回链表头指针。
+     * 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+    * @Date: 2020/6/29 0029 
+    */
+    public ListNode deleteDuplication(ListNode pHead){
+        if(pHead == null){
+            return null;
+        }
+        ListNode p1 = pHead;
+        List<Integer> list = new ArrayList<>();
+        List<Integer> repeatList = new ArrayList<>();
+        // 含有重复的节点值存入了repeatList中
+        while(p1!=null){
+            if(!list.contains(p1.val)){
+                list.add(p1.val);
+            }else{
+                if(!repeatList.contains(p1.val)){
+                    repeatList.add(p1.val);
+                }
+            }
+            p1 = p1.next;
+        }
+
+        if(repeatList.contains(pHead.val)){ //如果头结点是重复元素，后移
+            while (repeatList.contains(pHead.val)){
+                if(repeatList.contains(pHead.next.val) && pHead.next.next==null){
+                    return null;
+                }
+                if(pHead!=null){
+                    pHead = pHead.next;
+                }else{
+                    return null;
+                }
+            }
+        }
+
+        p1 = pHead;
+        ListNode p2 = pHead.next;
+        while(p2!=null){
+            if(repeatList.contains(p2.val)){
+                while(repeatList.contains(p2.val)){
+                if(p2.next == null){
+                    p2 = null;
+                    break;
+                }
+                p2 = p2.next;
+               }
+            }
+            if(p1.next!=p2){
+               p1.next = p2;
+               if(p2!=null){
+                   p2 = p2.next;
+                   p1 = p1.next;
+               }
+
+            }else{
+                p1 = p1.next;
+                p2 = p2.next;
+            }
+        }
+        return pHead;
+    }
+
+    @Test
+    public void testDeleteDuplication(){
+        ListNode pHead = new ListNode(1);
+        ListNode p1 = new ListNode(1);
+        ListNode p2 = new ListNode(2);
+        ListNode p3 = new ListNode(3);
+        ListNode p4 = new ListNode(3);
+        ListNode p5 = new ListNode(4);
+        ListNode p6 = new ListNode(5);
+        ListNode p7 = new ListNode(5);
+        pHead.next = p1;
+        p1.next = p2;
+        p2.next = p3;
+        p3.next = p4;
+        p4.next = p5;
+        p5.next = p6;
+        p6.next = p7;
+        deleteDuplication(pHead);
+        System.out.println(pHead);
+
+    }
 }
