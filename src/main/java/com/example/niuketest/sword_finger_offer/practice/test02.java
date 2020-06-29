@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-03-31 11:41
  **/
 
@@ -15,7 +15,7 @@ public class test02 {
     /** 
     * @Description: 求正整数的原码,如果是负数的话，求其补码
     * @Param: []
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/3/31 0031 
     */ 
     @Test

@@ -3,7 +3,7 @@ package com.example.niuketest.sword_finger_offer.practice;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-07 17:33
  **/
 public class test06 {
@@ -19,7 +19,7 @@ public class test06 {
     * @Description: 输入两个单调递增的链表，输出两个链表合成后的链表，
      * 当然我们需要合成后的链表满足单调不减规则。
     * @Param:
-    * @Author: chenzhen
+    * @Author:
     * @Date: 2020/4/7 0007
     */
 

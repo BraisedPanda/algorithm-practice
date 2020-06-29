@@ -3,7 +3,7 @@ package com.example.niuketest.sword_finger_offer.practice;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-10 13:57
  **/
 
@@ -27,7 +27,7 @@ public class test07 {
     * @Description:  输入两棵二叉树A，B，判断B是不是A的子结构。
      * （ps：我们约定空树不是任意一个树的子结构）
     * @Param: 
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/4/10 0010 
     */
 
@@ -71,7 +71,7 @@ public class test07 {
     * @Description: 操作给定的二叉树，将其变换为源二叉树的镜像。
      *      也就是调换二叉树的左右子树
     * @Param: [root]
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/4/10 0010 
     */ 
     public void Mirror(TreeNode root) {

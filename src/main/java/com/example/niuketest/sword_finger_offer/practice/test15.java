@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-05-22 14:41
  **/
 public class test15 {
@@ -261,7 +261,7 @@ public class test15 {
     /** 
     * @Description: 此方法作废，每次报数只能从零开始，并不能继续
     * @Param: [n, m]
-    * @Author: chenzhen      
+    * @Author:
     * @Date: 2020/6/16 0016 
     */ 
     public int LastRemaining_Solution2(int n, int m) {

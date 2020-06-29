@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-13 11:33
  **/
 public class test09 {
@@ -17,7 +17,7 @@ public class test09 {
      * 定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
          注意：保证测试中不会当栈为空的时候，对栈调用pop()或者min()或者top()方法。
     * @Param:
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/4/13 0013 
     */
     Stack<Integer> stack = new Stack();

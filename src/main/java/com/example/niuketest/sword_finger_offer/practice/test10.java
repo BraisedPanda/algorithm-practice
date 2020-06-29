@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-13 13:41
  **/
 public class test10 {
@@ -97,7 +97,7 @@ public class test10 {
      * 如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
     * @Param:后序:左右根，左边的小于根节点，右边大于根节点
      * 递归方法，去除最后一个根节点，则前面的节点可以分为两半，前半部分节点小于后半部分节点
-    * @Author: chenzhen
+    * @Author:
     * @Date: 2020/4/23 0023
     */
     public boolean VerifySquenceOfBST(int [] sequence) {

@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-03-31 15:53
  **/
 public class test03 {
@@ -13,7 +13,7 @@ public class test03 {
     * @Description: 给定一个double类型的浮点数base和int类型的整数exponent。
      * 求base的exponent次方。保证base和exponent不同时为0
     * @Param: [base, exponent]
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/3/31 0031 
     */ 
     @Test

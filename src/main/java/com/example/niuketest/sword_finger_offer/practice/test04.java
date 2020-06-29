@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-03-31 16:20
  **/
 public class test04 {
@@ -17,7 +17,7 @@ public class test04 {
      * 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，
      * 并保证奇数和奇数，偶数和偶数之间的相对位置不变。
     * @Param:
-    * @Author: chenzhen
+    * @Author:
     * @Date: 2020/3/31 0031
     */
     @Test
@@ -43,7 +43,7 @@ public class test04 {
     /** 
     * @Description: 方法2,从头开始，相邻两个数检测，
     * @Param: []
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/3/31 0031 
     */ 
     @Test

@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-05-11 11:01
  **/
 public class test14 {

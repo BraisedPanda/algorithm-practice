@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-28 10:59
  **/
 public class test11 {
@@ -76,7 +76,7 @@ public class test11 {
      * 例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，
      * 超过数组长度的一半，因此输出2。如果不存在则输出0。
     * @Param:
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/5/6 0006 
     */
     public int MoreThanHalfNum_Solution(int [] array) {
@@ -107,7 +107,7 @@ public class test11 {
     * @Description: 输入n个整数，找出其中最小的K个数。
      * 例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
     * @Param:
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/5/6 0006 
     */
     public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {

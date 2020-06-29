@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-04-07 14:51
  **/
 public class test05 {
@@ -17,7 +17,7 @@ public class test05 {
     对数列A进行重新排列,使数列A满足所有的A[i] * A[i + 1](1 ≤ i ≤ N - 1)都是4的倍数。
     小易现在需要判断一个数列是否可以重排之后满足牛博士的要求。
     * @Param: 
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/4/7 0007 
     */
   

@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @program: niuke-test
  * @description:
- * @author: chenzhen
+ * @author:
  * @create: 2020-03-26 11:25
  **/
 
@@ -15,7 +15,7 @@ public class test01 {
      * 也可以跳上2级……它也可以跳上n级。
      * 求该青蛙跳上一个n级的台阶总共有多少种跳法。
     * @Param: [number]
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/3/26 0026 
     */ 
 //    @Test
@@ -35,7 +35,7 @@ public class test01 {
      * 请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
      比如n=3时，2*3的矩形块有3种覆盖方法：
     * @Param:
-    * @Author: chenzhen       
+    * @Author:
     * @Date: 2020/3/31 0031 
     */
 
