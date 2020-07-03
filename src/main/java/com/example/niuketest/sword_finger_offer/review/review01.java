@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
- * @program: niuke-test
+ * @program: 剑指offer题目1~10
  * @description: 温故而知新，可以为师矣
  * @create: 2020-07-02 15:08
  **/
@@ -208,6 +208,113 @@ public class review01 {
         return stack2.pop();
     }
 
+  /** [6]
+  * @Description: 旋转数组的最小数字
+  * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+   * 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。
+   * 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
+   * NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
+  * @Date: 2020/7/3 0003 
+  */
+  public int minNumberInRotateArray(int [] array) {
+        if(array.length == 0){
+            return 0;
+        }
+        int i=0;
+        int j=array.length-1;
+        int mid = (i+j)/2;
+        while(i!=j){
+            if(array[mid]>array[j]){
+                i = mid+1;
+                mid = (i+j)/2;
+            }else{
+                j = mid;
+                mid = (i+j)/2;
+            }
+
+        }
+        return array[i];
+  }
+
+
+  @Test
+    public void testMinNumberInRotateArray(){
+      int[] array = {3,4,5,6,1};
+      System.out.println(minNumberInRotateArray(array));
+  }
+
+
+  /** [7]
+  * @Description: 斐波那契数列
+  * @Param: 大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0，第1项是1）。
+   * n<=39
+  * @Date: 2020/7/3 0003
+  */
+
+  public int Fibonacci(int n) {
+      if(n == 0){
+          return 0;
+      }
+      if(n == 1){
+          return 1;
+      }
+      return Fibonacci(n-2)+Fibonacci(n-1);
+  }
+
+  /** [8]
+  * @Description: 跳台阶
+  * @Param: 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
+  * @Date: 2020/7/3 0003
+  */
+  public int JumpFloor(int target) {
+      if(target == 0){
+          return 0;
+      }
+      if(target == 1){
+          return 1;
+      }
+      if(target == 2){
+          return 2;
+      }
+      return JumpFloor(target-1)+JumpFloor(target-2);
+  }
+
+  /** [9] 变态跳台阶
+  * @Description:
+  * @Param: 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+  * @Date: 2020/7/3 0003 
+  */
+  public int JumpFloorII(int target) {
+    if(target == 0){
+        return 0;
+    }
+    if(target == 1){
+        return 1;
+    }
+    if(target == 2){
+        return 2;
+    }
+    return 2*JumpFloorII(target-1);
+  }
+
+  /** [10]
+  * @Description: 矩阵覆盖
+  * @Param: 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+   * 比如n=3时，2*3的矩形块有3种覆盖方法：
+  * @Date: 2020/7/3 0003
+  */
+  public int RectCover(int target) {
+     if(target == 0){
+         return 0;
+     }
+     if(target == 1){
+         return 1;
+     }
+     if(target == 2){
+         return 2;
+     }
+     return RectCover(target-2)+RectCover(target-1);
+  }
 
 
 
